@@ -19,14 +19,14 @@ function Form2({methods}) {
         // Set permanent address to be the same as present address
         if (isSame) {
             Object.keys(presentAddress).forEach(key => {
-              if (presentAddress[key] && presentAddress[key] !== getValues(`permanentAddress.${key}`)) {
+              if (key && presentAddress[key] && presentAddress[key] !== getValues(`permanentAddress.${key}`)) {
                 setValue(`permanentAddress.${key}`, presentAddress[key]);
               }
             });
           }
       
     
-  } , [presentAddress , isSame ])
+  } , [presentAddress  ])
   
   // Common configuration for Select and Input components
   const commonProps = {

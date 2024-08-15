@@ -9,11 +9,14 @@ import { useForm } from 'react-hook-form'
 
 function FormPage() {
   const methods = useForm() ;
+  const [submitted , setSubmitted] = useState(false) ;
   const [step, setStep] = useState(1);
   
 
 const submitHandler = (data)=>{
   console.log(data); 
+  alert("Form Submitted")
+  setSubmitted(true)
 }
  
 
@@ -32,9 +35,10 @@ const submitHandler = (data)=>{
     console.log('Final Form Data:', data);
   };
 
-
+  
   return (
-    <form onSubmit={methods.handleSubmit(submitHandler)} className='w-full  h-full flex flex-col'>
+    !submitted ? 
+    (<form onSubmit={methods.handleSubmit(submitHandler)} className='w-full  h-full flex flex-col'>
       
       {step === 1 && <Form1 methods = {methods }  />}
         {step === 2 && <Form2 methods={methods}  />}
@@ -47,10 +51,11 @@ const submitHandler = (data)=>{
         <div className='flex gap-8 justify-end items-center m-10 '>
         {step >1 && <button type="button" onClick={prevStep}>Previous</button>}
         { step <5 && <button className='w-fit self-end' type="button" onClick={handleNextStep}>Save and Continue</button>}
-        {step == 5 && <button type="submit" className='w-fit self-end'  onClick={handleNextStep}>Submit</button>}
+        {step == 5 && <button type="submit" className='w-fit self-end'  >Submit</button>}
         </div>
-    </form>
-  )
+    </form>)
+    :   (<div> Submitted Successfully </div>)
+  ) 
 }
 
 export default FormPage

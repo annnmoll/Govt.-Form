@@ -4,11 +4,14 @@ import Input from "../common/Input";
 import { useWatch } from "react-hook-form";
 const categories = ["General", "SC/BC", "OBC"];
 const houseType = ["Kucha House", "Pucca House"];
+const bankNames = ["PNB" , "SBI" , "Axis"];
+const bankBranches =  ["Bhiwani Stand" , "Rohini"]
+const gasStatuses = ["active" , "inactive"]
 function Form3({ methods }) {
   const {
     register,
     formState: { errors },
-    control,
+  
     watch,
   } = methods;
 
@@ -89,6 +92,7 @@ function Form3({ methods }) {
           <Select
             label="Bank Name"
             disabled={!watch("hasBankAccount")}
+            options = {bankNames}
             required={watch("hasBankAccount") ? "true" : false}
             errors={errors?.bankDetails?.bankName}
             {...register("bankDetails.bankName", {
@@ -99,6 +103,7 @@ function Form3({ methods }) {
           />
           <Select
             label="Branch Name"
+            options = {bankBranches}
             disabled={!watch("hasBankAccount")}
             required={watch("hasBankAccount") ? "true" : false}
             errors={errors?.bankDetails?.branchName}
@@ -145,6 +150,7 @@ function Form3({ methods }) {
 
         <div className=" grid md:grid-cols-2 gap-x-6 gap-y-4 ">
           <Select
+          options = {gasStatuses}
             label="Gas Connection Status"
             disabled={!watch("hasGasConnection")}
             required={watch("hasGasConnection") ? "true" : false}
@@ -157,6 +163,7 @@ function Form3({ methods }) {
           />
           <Select
             label="Gas Company Name"
+            options = {["HP" , "Indane"]}
             disabled={!watch("hasGasConnection")}
             required={watch("hasGasConnection") ? "true" : false}
             errors={errors?.gasDetails?.company}
@@ -168,6 +175,7 @@ function Form3({ methods }) {
           />
           <Select
             label="Gas Agency Name"
+            options = {["Rohini" , "Sunny"]}
             disabled={!watch("hasGasConnection")}
             required={watch("hasGasConnection") ? "true" : false}
             errors={errors?.gasDetails?.agency}
@@ -214,6 +222,7 @@ function Form3({ methods }) {
         <div className=" grid md:grid-cols-2 gap-x-6 gap-y-4 ">
           <Select
             label="Electric Company Name"
+            options = {["UHBVNL"]}
             required={watch("hasElectricityConnection")}
             disabled={!watch("hasElectricityConnection")}
             errors={errors?.electricityDetails?.companyName}
@@ -330,6 +339,7 @@ function Form3({ methods }) {
             })}
           />
           <Select
+            options ={ ["Accident"]}
             required={watch("isPhysicallyAble")}
             disabled={!watch("isPhysicallyAble")}
             label="Differently abled due to"
@@ -364,6 +374,7 @@ function Form3({ methods }) {
                 $id="year"
                 value="year"
                 name="since"
+                options = {["1995" , "1996"]}
                 disabled={!watch("isPhysicallyAble")}
                 {...register("physicalDetails.since")}
               />
@@ -375,6 +386,7 @@ function Form3({ methods }) {
 
           <Select
             label="Disability Since Year"
+            options={["1996" , "1997"]}
             required={(watch("physicalDetails.since") == "year")}
             disabled={!(watch("physicalDetails.since") == "year")}
             errors={errors?.physicalDetails?.year}

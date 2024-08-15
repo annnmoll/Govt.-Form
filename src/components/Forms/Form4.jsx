@@ -4,7 +4,7 @@ import {useForm , useFieldArray} from "react-hook-form"
 import {Modal} from "@mui/material"
 import AddForm from './AddForm';
 function Form4({methods}) {
-    const { control, handleSubmit, register, reset, getValues, setValue  } = methods ; 
+    const { control, getValues } = methods ; 
 
       const { fields, append } = useFieldArray({
         control,
@@ -12,9 +12,7 @@ function Form4({methods}) {
       });
       
       const [isModalOpen, setModalOpen] = useState(false);    
-      const onSubmit = (data) => {
-        console.log('Form data:', data);
-      };
+     
 
       const openModal = () =>{console.log("opening"); setModalOpen(true);}
       const closeModal = () => setModalOpen(false);
@@ -42,7 +40,7 @@ function Form4({methods}) {
         <div className='flex flex-col gap-5 mt-10 '>
         {fields.map((field, index) => (
           <div key={field.id} className="flex justify-between">
-            <h3>{getValues(`members[${index}].name`)}</h3>
+            <h3>{getValues(`members[${index}].personalDetails.name`)}</h3>
                 
             {/* Add more fields as needed */}
           </div>
